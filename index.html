@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Termómetro Urbano</title>
-  <meta name="description" content="Sube dos fotos a la carpeta del proyecto." />
+  <title>Mapa térmico ciudadano</title>
+  <meta
+    name="description"
+    content="Ayúdanos a identificar los lugares donde mejor y peor se vive el calor en verano."
+  />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
 
@@ -21,30 +24,39 @@
 <body>
   <main class="app">
     <header class="hero">
-      <h1>Subir dos fotos</h1>
+      <h1>¿Cómo se siente este lugar en verano?</h1>
       <p class="subtitle">
-        Selecciona dos imágenes. Se reducen en tu dispositivo y se envían a la
-        carpeta del proyecto.
+        Ayúdanos a identificar los lugares donde mejor y peor se vive el calor.
       </p>
     </header>
 
-    <section class="slots">
-      <!-- Slot 1 -->
-      <article class="slot" data-index="0" aria-label="Foto 1">
+    <section class="duo">
+      <!-- Lado FRESCO -->
+      <article
+        class="slot slot--fresh"
+        data-index="0"
+        aria-label="Sitio agradable térmicamente"
+      >
+        <div class="slot-header">
+          <span class="slot-emoji" aria-hidden="true">🌳</span>
+          <h2 class="slot-heading">Sitios agradables</h2>
+          <p class="slot-sub">Lugares donde estarías en agosto</p>
+        </div>
+
         <label class="slot-empty">
           <input type="file" accept="image/*" class="slot-input" />
           <span class="slot-plus" aria-hidden="true">+</span>
-          <span class="slot-title">Foto 1</span>
-          <span class="slot-hint">Toca para seleccionar</span>
+          <span class="slot-cta">Añadir foto</span>
+          <span class="slot-hint">Toca para seleccionar una imagen</span>
         </label>
 
         <div class="slot-filled" hidden>
-          <img class="slot-preview" alt="Vista previa de la foto 1" />
-          <div class="slot-info">
+          <img class="slot-preview" alt="Vista previa del sitio agradable" />
+          <div class="slot-meta-row">
             <p class="slot-filename"></p>
             <p class="slot-meta"></p>
           </div>
-          <button type="button" class="slot-clear" aria-label="Quitar foto 1">×</button>
+          <button type="button" class="slot-change">Cambiar foto</button>
         </div>
 
         <div class="slot-loading" hidden>
@@ -53,22 +65,32 @@
         </div>
       </article>
 
-      <!-- Slot 2 -->
-      <article class="slot" data-index="1" aria-label="Foto 2">
+      <!-- Lado CALOR -->
+      <article
+        class="slot slot--hot"
+        data-index="1"
+        aria-label="Sitio caluroso e incómodo"
+      >
+        <div class="slot-header">
+          <span class="slot-emoji" aria-hidden="true">☀️</span>
+          <h2 class="slot-heading">Sitios calurosos</h2>
+          <p class="slot-sub">Sitios que evitarías en agosto</p>
+        </div>
+
         <label class="slot-empty">
           <input type="file" accept="image/*" class="slot-input" />
           <span class="slot-plus" aria-hidden="true">+</span>
-          <span class="slot-title">Foto 2</span>
-          <span class="slot-hint">Toca para seleccionar</span>
+          <span class="slot-cta">Añadir foto</span>
+          <span class="slot-hint">Toca para seleccionar una imagen</span>
         </label>
 
         <div class="slot-filled" hidden>
-          <img class="slot-preview" alt="Vista previa de la foto 2" />
-          <div class="slot-info">
+          <img class="slot-preview" alt="Vista previa del sitio caluroso" />
+          <div class="slot-meta-row">
             <p class="slot-filename"></p>
             <p class="slot-meta"></p>
           </div>
-          <button type="button" class="slot-clear" aria-label="Quitar foto 2">×</button>
+          <button type="button" class="slot-change">Cambiar foto</button>
         </div>
 
         <div class="slot-loading" hidden>
@@ -79,8 +101,13 @@
     </section>
 
     <button id="upload-btn" class="primary-btn" type="button" disabled>
-      Subir fotos
+      Añadir al mapa térmico
     </button>
+
+    <p class="footer-note">
+      Tus fotos ayudan a identificar qué espacios funcionan mejor frente al
+      calor y cuáles necesitan más sombra o mejoras urbanas.
+    </p>
 
     <div id="status" class="status" role="status" aria-live="polite"></div>
   </main>

@@ -4,7 +4,7 @@
  * Pega aquí la URL de tu despliegue de Apps Script (Web App).
  * Termina en "/exec" cuando se despliega como aplicación web.
  */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTroDSikvk4tbWasxMeomuM918Nwzp9unjNxORf2LJm-c0enF_u6QkdLFdMTBA8oY/exec";
+const APPS_SCRIPT_URL = "PEGA_AQUI_LA_URL_DE_TU_APPS_SCRIPT";
 
 const MAX_DIMENSION = 1600;   // px del lado más largo tras comprimir
 const JPEG_QUALITY  = 0.8;    // calidad JPEG de la imagen comprimida
@@ -29,9 +29,9 @@ const statusEl  = document.getElementById("status");
  * Inicialización: cablear los dos slots
  * ------------------------------------------------------------------ */
 slotEls.forEach((slot) => {
-  const index   = Number(slot.dataset.index);
-  const input   = slot.querySelector(".slot-input");
-  const clearEl = slot.querySelector(".slot-clear");
+  const index    = Number(slot.dataset.index);
+  const input    = slot.querySelector(".slot-input");
+  const changeEl = slot.querySelector(".slot-change");
 
   input.addEventListener("change", (e) => {
     const file = e.target.files && e.target.files[0];
@@ -40,7 +40,8 @@ slotEls.forEach((slot) => {
     e.target.value = "";
   });
 
-  clearEl.addEventListener("click", () => onPhotoRemoved(index));
+  // "Cambiar foto": reabre el selector de archivos
+  changeEl.addEventListener("click", () => input.click());
 });
 
 uploadBtn.addEventListener("click", onUploadClicked);
@@ -80,13 +81,6 @@ async function onPhotoSelected(index, file) {
   } finally {
     setSlotLoading(index, false);
   }
-}
-
-function onPhotoRemoved(index) {
-  photos[index] = null;
-  renderSlot(index);
-  refreshUploadButton();
-  clearStatus();
 }
 
 /* ==================================================================
@@ -190,11 +184,13 @@ function renderSlot(index) {
   const photo      = photos[index];
 
   if (!photo) {
+    slot.classList.remove("is-filled");
     emptyEl.hidden  = false;
     filledEl.hidden = true;
     return;
   }
 
+  slot.classList.add("is-filled");
   emptyEl.hidden  = true;
   filledEl.hidden = false;
 

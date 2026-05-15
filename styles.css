@@ -1,24 +1,41 @@
 :root {
-  --bg: #f7f3ec;
+  /* Lienzo */
+  --bg: #FBF8F2;
   --surface: #ffffff;
-  --border: #e8e2d2;
-  --border-strong: #d8d0bd;
-  --text: #2a2823;
-  --text-muted: #807972;
-  --primary: #87a878;
-  --primary-hover: #6e8f60;
-  --primary-soft: #eaf0e3;
-  --success: #6e8f60;
-  --error: #b85c3f;
-  --error-soft: #f6e3dc;
-  --disabled-bg: #e3ddd0;
-  --disabled-text: #a89f90;
+  --text: #2A2823;
+  --text-muted: #7A746B;
+
+  /* Lado FRESCO (verde/azul pastel) */
+  --fresh-bg:           #DCEFD9;
+  --fresh-bg-vivid:     #C5E5BD;   /* al cargar la foto */
+  --fresh-accent:       #5C8A6A;
+  --fresh-accent-strong:#3F6648;
+  --fresh-soft:         #EAF3E5;
+
+  /* Lado CALOR (naranja/coral/melocotón pastel) */
+  --hot-bg:           #FFE0D6;
+  --hot-bg-vivid:     #FFCCB8;     /* al cargar la foto */
+  --hot-accent:       #C77052;
+  --hot-accent-strong:#9F4F36;
+  --hot-soft:         #FFEDE3;
+
+  /* Botón principal: sage profundo, neutral entre los dos lados */
+  --primary:        #3F6648;
+  --primary-hover:  #2D4A33;
+  --disabled-bg:    #E5DFD4;
+  --disabled-text:  #A89F90;
+
+  --radius-xl: 24px;
   --radius-lg: 18px;
   --radius-md: 12px;
+  --radius-pill: 100px;
+
   --shadow-sm: 0 1px 2px rgba(60, 50, 30, 0.04);
-  --shadow-md: 0 6px 24px rgba(60, 50, 30, 0.08);
+
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Manrope", system-ui, -apple-system, sans-serif;
+
+  --ease: cubic-bezier(.4, 0, .2, 1);
 }
 
 * {
@@ -47,81 +64,127 @@ body {
 }
 
 .app {
-  max-width: 720px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 32px 20px 48px;
+  padding: 36px 20px 56px;
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
-/* Hero */
+/* ===== Hero ============================================================= */
 .hero {
   text-align: center;
+  padding: 0 8px;
 }
 
 .hero h1 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.9rem, 5vw + 0.5rem, 2.6rem);
+  font-size: clamp(1.9rem, 4vw + 0.8rem, 2.8rem);
   letter-spacing: -0.01em;
-  margin: 0 0 8px;
+  line-height: 1.1;
+  margin: 0 0 12px;
   color: var(--text);
 }
 
 .subtitle {
-  margin: 0;
+  margin: 0 auto;
   color: var(--text-muted);
-  font-size: 1rem;
-  line-height: 1.5;
-  max-width: 38ch;
-  margin-inline: auto;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 46ch;
 }
 
-/* Slots */
-.slots {
+/* ===== Duo (los dos mundos) ============================================= */
+.duo {
   display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 600px) {
-  .slots {
-    grid-template-columns: 1fr 1fr;
-  }
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
 }
 
 .slot {
   position: relative;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  background: var(--side-bg);
+  border-radius: var(--radius-xl);
+  padding: 26px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  transition: background 400ms var(--ease);
   overflow: hidden;
-  min-height: 220px;
 }
 
-/* Empty state */
+.slot--fresh {
+  --side-bg:            var(--fresh-bg);
+  --side-bg-vivid:      var(--fresh-bg-vivid);
+  --side-accent:        var(--fresh-accent);
+  --side-accent-strong: var(--fresh-accent-strong);
+  --side-soft:          var(--fresh-soft);
+}
+
+.slot--hot {
+  --side-bg:            var(--hot-bg);
+  --side-bg-vivid:      var(--hot-bg-vivid);
+  --side-accent:        var(--hot-accent);
+  --side-accent-strong: var(--hot-accent-strong);
+  --side-soft:          var(--hot-soft);
+}
+
+/* Estado "vivo" al cargar una foto: el fondo gana intensidad */
+.slot.is-filled {
+  background: var(--side-bg-vivid);
+}
+
+/* ===== Cabecera de cada lado ============================================ */
+.slot-header {
+  text-align: left;
+}
+
+.slot-emoji {
+  font-size: 30px;
+  line-height: 1;
+  display: inline-block;
+}
+
+.slot-heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  margin: 10px 0 4px;
+  color: var(--text);
+}
+
+.slot-sub {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--side-accent-strong);
+  opacity: 0.85;
+}
+
+/* ===== Estado vacío ===================================================== */
 .slot-empty {
-  position: relative;
+  flex: 1;
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 32px 16px;
-  min-height: 220px;
-  cursor: pointer;
+  gap: 10px;
+  padding: 24px;
   text-align: center;
-  border: 2px dashed transparent;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.45);
+  border: 2px dashed rgba(255, 255, 255, 0.85);
   border-radius: var(--radius-lg);
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 220ms var(--ease), border-color 220ms var(--ease);
 }
 
 .slot-empty:hover,
 .slot-empty:focus-within {
-  background: var(--primary-soft);
-  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.7);
+  border-color: #ffffff;
 }
 
 .slot-input {
@@ -132,58 +195,69 @@ body {
 }
 
 .slot-plus {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: var(--primary-soft);
-  color: var(--primary);
+  background: #ffffff;
+  color: var(--side-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 34px;
+  font-weight: 300;
   line-height: 1;
+  box-shadow: var(--shadow-sm);
+  transition: transform 220ms var(--ease);
 }
 
-.slot-title {
+.slot-empty:hover .slot-plus {
+  transform: scale(1.06);
+}
+
+.slot-cta {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.2rem;
-  margin-top: 6px;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-top: 4px;
 }
 
 .slot-hint {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  color: var(--side-accent-strong);
+  opacity: 0.8;
 }
 
-/* Filled state */
+/* ===== Estado lleno ===================================================== */
 .slot-filled {
+  flex: 1;
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  height: 100%;
+  gap: 12px;
+  min-height: 0;
+  animation: fadeInUp 320ms var(--ease);
 }
 
 .slot-preview {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  flex: 1;
+  min-height: 200px;
   object-fit: cover;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.5);
   display: block;
-  background: var(--border);
 }
 
-.slot-info {
-  flex: 1;
-  padding: 12px 14px 14px;
-  text-align: left;
-  min-width: 0;
+.slot-meta-row {
+  padding: 0 4px;
 }
 
 .slot-filename {
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   font-size: 0.92rem;
   font-weight: 600;
+  color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -192,46 +266,45 @@ body {
 .slot-meta {
   margin: 0;
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: var(--side-accent-strong);
+  opacity: 0.9;
   line-height: 1.4;
 }
 
 .slot-meta .has-gps {
-  color: var(--success);
-  font-weight: 500;
+  color: var(--side-accent-strong);
+  font-weight: 600;
 }
 
-.slot-clear {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+.slot-change {
+  align-self: flex-start;
+  margin-top: 4px;
+  background: #ffffff;
+  color: var(--side-accent-strong);
   border: none;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--text);
-  font-size: 22px;
-  line-height: 1;
+  padding: 11px 22px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: var(--shadow-sm);
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: background 200ms var(--ease), transform 120ms var(--ease);
 }
 
-.slot-clear:hover {
-  background: var(--error-soft);
-  color: var(--error);
-  transform: scale(1.05);
+.slot-change:hover {
+  background: var(--side-soft);
 }
 
-/* Loading overlay inside slot */
+.slot-change:active {
+  transform: scale(0.97);
+}
+
+/* ===== Overlay "Procesando…" ============================================ */
 .slot-loading {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,43 +312,49 @@ body {
   color: var(--text-muted);
   font-size: 0.95rem;
   z-index: 2;
+  border-radius: var(--radius-xl);
 }
 
 .spinner {
   width: 18px;
   height: 18px;
-  border: 2px solid var(--border-strong);
-  border-top-color: var(--primary);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--side-accent);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
-/* Primary button */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Botón principal ================================================== */
 .primary-btn {
   width: 100%;
-  min-height: 56px;
-  padding: 14px 24px;
+  min-height: 60px;
+  padding: 18px 24px;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
   font-family: var(--font-body);
   font-size: 1.05rem;
   font-weight: 600;
-  color: #ffffff;
-  background: var(--primary);
-  border: none;
-  border-radius: var(--radius-md);
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  transition: background 240ms var(--ease), transform 120ms var(--ease),
+              box-shadow 240ms var(--ease), opacity 240ms var(--ease);
   box-shadow: var(--shadow-sm);
 }
 
 .primary-btn:hover:not(:disabled) {
   background: var(--primary-hover);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 20px rgba(63, 102, 72, 0.18);
 }
 
 .primary-btn:active:not(:disabled) {
@@ -289,14 +368,24 @@ body {
   box-shadow: none;
 }
 
-/* Status messages */
+/* ===== Nota inferior ==================================================== */
+.footer-note {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+/* ===== Mensajes de estado =============================================== */
 .status {
   min-height: 1.5em;
   text-align: center;
   font-size: 0.98rem;
   padding: 12px 16px;
   border-radius: var(--radius-md);
-  transition: opacity 0.2s ease;
+  transition: opacity 200ms var(--ease);
 }
 
 .status:empty {
@@ -311,17 +400,50 @@ body {
 
 .status.loading {
   color: var(--text);
-  background: var(--primary-soft);
+  background: var(--fresh-soft);
 }
 
 .status.success {
-  color: var(--success);
-  background: var(--primary-soft);
+  color: var(--fresh-accent-strong);
+  background: var(--fresh-soft);
   font-weight: 500;
 }
 
 .status.error {
-  color: var(--error);
-  background: var(--error-soft);
+  color: var(--hot-accent-strong);
+  background: var(--hot-soft);
   font-weight: 500;
+}
+
+/* ===== Móvil ============================================================ */
+@media (max-width: 720px) {
+  .app {
+    padding: 24px 16px 40px;
+    gap: 22px;
+  }
+
+  .duo {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .slot {
+    min-height: 420px;
+    padding: 22px 20px 20px;
+  }
+
+  .slot-heading {
+    font-size: 1.25rem;
+  }
+
+  .slot-plus {
+    width: 56px;
+    height: 56px;
+    font-size: 30px;
+  }
+
+  .primary-btn {
+    min-height: 56px;
+    font-size: 1rem;
+  }
 }
