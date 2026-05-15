@@ -25,6 +25,11 @@
   box-sizing: border-box;
 }
 
+/* El atributo [hidden] debe ganar siempre, incluso sobre display:flex */
+[hidden] {
+  display: none !important;
+}
+
 html,
 body {
   margin: 0;
