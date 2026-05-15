@@ -6,13 +6,13 @@
   <title>Mapa térmico ciudadano</title>
   <meta
     name="description"
-    content="Ayúdanos a identificar los lugares donde mejor y peor se vive el calor en verano."
+    content="Ayúdanos a crear un mapa ciudadano del calor."
   />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,500;9..144,0,600;9..144,1,500;9..144,1,600&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
 
@@ -22,95 +22,97 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="app">
-    <header class="hero">
-      <h1>¿Cómo se siente este lugar en verano?</h1>
-      <p class="subtitle">
-        Ayúdanos a identificar los lugares donde mejor y peor se vive el calor.
-      </p>
-    </header>
+  <header class="hero">
+    <h1>¿Cómo se siente este lugar en verano?</h1>
+    <p class="subtitle">
+      Ayúdanos a identificar los lugares donde mejor y peor se vive el calor.
+    </p>
+  </header>
 
-    <section class="duo">
-      <!-- Lado FRESCO -->
-      <article
-        class="slot slot--fresh"
-        data-index="0"
-        aria-label="Sitio agradable térmicamente"
-      >
-        <div class="slot-header">
-          <span class="slot-emoji" aria-hidden="true">🌳</span>
-          <h2 class="slot-heading">Sitios agradables</h2>
-          <p class="slot-sub">Lugares donde estarías en agosto</p>
+  <section class="duo">
+    <!-- Lado FRESCO -->
+    <article
+      class="slot slot--fresh"
+      data-index="0"
+      aria-label="Sitio agradable térmicamente"
+    >
+      <div class="slot-header">
+        <span class="slot-emoji" aria-hidden="true">🌳</span>
+        <h2 class="slot-heading">Sitios agradables</h2>
+        <p class="slot-sub">Lugares donde estarías en agosto</p>
+      </div>
+
+      <label class="slot-empty">
+        <input type="file" accept="image/*" class="slot-input" />
+        <span class="slot-plus" aria-hidden="true">+</span>
+        <span class="slot-cta">Añadir foto</span>
+        <span class="slot-hint">Toca para seleccionar una imagen</span>
+      </label>
+
+      <div class="slot-filled" hidden>
+        <img class="slot-preview" alt="Vista previa del sitio agradable" />
+        <div class="slot-meta-row">
+          <p class="slot-filename"></p>
+          <p class="slot-meta"></p>
         </div>
+        <button type="button" class="slot-change">Cambiar foto</button>
+      </div>
 
-        <label class="slot-empty">
-          <input type="file" accept="image/*" class="slot-input" />
-          <span class="slot-plus" aria-hidden="true">+</span>
-          <span class="slot-cta">Añadir foto</span>
-          <span class="slot-hint">Toca para seleccionar una imagen</span>
-        </label>
+      <div class="slot-loading" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span>Procesando…</span>
+      </div>
+    </article>
 
-        <div class="slot-filled" hidden>
-          <img class="slot-preview" alt="Vista previa del sitio agradable" />
-          <div class="slot-meta-row">
-            <p class="slot-filename"></p>
-            <p class="slot-meta"></p>
-          </div>
-          <button type="button" class="slot-change">Cambiar foto</button>
+    <!-- Chip central VS -->
+    <div class="vs" aria-hidden="true">vs</div>
+
+    <!-- Lado CALOR -->
+    <article
+      class="slot slot--hot"
+      data-index="1"
+      aria-label="Sitio caluroso e incómodo"
+    >
+      <div class="slot-header">
+        <span class="slot-emoji" aria-hidden="true">☀️</span>
+        <h2 class="slot-heading">Sitios calurosos</h2>
+        <p class="slot-sub">Sitios que evitarías en agosto</p>
+      </div>
+
+      <label class="slot-empty">
+        <input type="file" accept="image/*" class="slot-input" />
+        <span class="slot-plus" aria-hidden="true">+</span>
+        <span class="slot-cta">Añadir foto</span>
+        <span class="slot-hint">Toca para seleccionar una imagen</span>
+      </label>
+
+      <div class="slot-filled" hidden>
+        <img class="slot-preview" alt="Vista previa del sitio caluroso" />
+        <div class="slot-meta-row">
+          <p class="slot-filename"></p>
+          <p class="slot-meta"></p>
         </div>
+        <button type="button" class="slot-change">Cambiar foto</button>
+      </div>
 
-        <div class="slot-loading" hidden>
-          <span class="spinner" aria-hidden="true"></span>
-          <span>Procesando…</span>
-        </div>
-      </article>
+      <div class="slot-loading" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span>Procesando…</span>
+      </div>
+    </article>
+  </section>
 
-      <!-- Lado CALOR -->
-      <article
-        class="slot slot--hot"
-        data-index="1"
-        aria-label="Sitio caluroso e incómodo"
-      >
-        <div class="slot-header">
-          <span class="slot-emoji" aria-hidden="true">☀️</span>
-          <h2 class="slot-heading">Sitios calurosos</h2>
-          <p class="slot-sub">Sitios que evitarías en agosto</p>
-        </div>
-
-        <label class="slot-empty">
-          <input type="file" accept="image/*" class="slot-input" />
-          <span class="slot-plus" aria-hidden="true">+</span>
-          <span class="slot-cta">Añadir foto</span>
-          <span class="slot-hint">Toca para seleccionar una imagen</span>
-        </label>
-
-        <div class="slot-filled" hidden>
-          <img class="slot-preview" alt="Vista previa del sitio caluroso" />
-          <div class="slot-meta-row">
-            <p class="slot-filename"></p>
-            <p class="slot-meta"></p>
-          </div>
-          <button type="button" class="slot-change">Cambiar foto</button>
-        </div>
-
-        <div class="slot-loading" hidden>
-          <span class="spinner" aria-hidden="true"></span>
-          <span>Procesando…</span>
-        </div>
-      </article>
-    </section>
-
+  <div class="bottom">
     <button id="upload-btn" class="primary-btn" type="button" disabled>
       Añadir al mapa térmico
     </button>
 
     <p class="footer-note">
-      Tus fotos ayudan a identificar qué espacios funcionan mejor frente al
-      calor y cuáles necesitan más sombra o mejoras urbanas.
+      Ayúdanos a crear un mapa ciudadano del calor.
     </p>
 
     <div id="status" class="status" role="status" aria-live="polite"></div>
-  </main>
+  </div>
 
   <script src="script.js" defer></script>
 </body>
