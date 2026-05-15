@@ -4,7 +4,7 @@
  * Pega aquí la URL de tu despliegue de Apps Script (Web App).
  * Termina en "/exec" cuando se despliega como aplicación web.
  */
-const APPS_SCRIPT_URL = "PEGA_AQUI_LA_URL_DE_TU_APPS_SCRIPT";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTroDSikvk4tbWasxMeomuM918Nwzp9unjNxORf2LJm-c0enF_u6QkdLFdMTBA8oY/exec";
 
 const MAX_DIMENSION = 1600;   // px del lado más largo tras comprimir
 const JPEG_QUALITY  = 0.8;    // calidad JPEG de la imagen comprimida
